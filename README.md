@@ -1,1 +1,0 @@
-# Django_Intern_Finder
