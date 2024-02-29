@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any resume. Create one from <a href="{% url 'update-resume' %}">here</a></b>
+</div>
+{% endif %}
+
+
+<section >
+    <div style="background-color: rgba(242, 226, 5, 0.8); color: #24282d" class=" rounded-3 mb-5">
+        <div class="container-fluid py-5 p-5">
+            <h1 class="display-5 fw-bold">Welcome to Job Hunter</h1>
+            <p class="col-md-8 fs-4 pb-5">Applicant Dashboard</p>
+            <p class="col-md-8 fs-4 fw-bold  ">Get your dream job</p>
+            <a href="{% url 'job-listing' %}" class="btn btn-lg " style="background-color: #049DD9; color: #ffffff;">Get Started</a>
+        </div>
+    </div>
+</section>
+{% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any company. Create one from <a href="{% url 'update-company' %}">here</a></b>
+</div>
+{% endif %}
+<section >
+    <div style="background-color: rgba(242, 226, 5, 0.8); color: #24282d" class=" mb-5 rounded-3">
+        <div class="container-fluid py-5 p-5">
+            <h1 class="display-5 fw-bold">Welcome to Job Hunter</h1>
+            <p class="col-md-8 fs-4 pb-5">Recruiter Dashboard</p>
+            <p class="col-md-8 fs-4 fw-bold pb-2 ">Get your Employee</p>
+            <a href="{%  url 'create-job' %}" class="btn btn-lg" style="background-color: #049DD9; color: #ffffff;">Get Started</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}

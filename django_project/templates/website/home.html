@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+
+<section>
+  <div style="background-color: rgba(242, 226, 5, 0.8); color: #24282d"  class="p-5 mb-4  rounded-3">
+    <div class="container-fluid py-5">
+      <h2 class="display-5 fw-bold">Get Hired Quickly!</h2>
+      <br>
+      <div class="card" style="background-color: #ffffff; color: #24282d; border: 1px solid #ffffff;">
+        <div class="card-body">
+          <form class="row gy-2 gx-3 align-items-center">
+            <div class="col-sm-2">
+              <label for="autosizingInput">Name</label>
+              {% render_field filter.form.title class="form-control" id="autosizingInput" placeholder="Job Keyword" style="background-color: #ffffff; color: ##24282d; border: 1px solid #ffffff; border-radius: 5px; padding: 10px;"  %}
+              
+              
+             
+            </div>
+            <div class="col-sm-3">
+              <label for="autosizingSelect">Select Location</label>
+              {% render_field filter.form.state class="form-select" id="autosizingInput" style="background-color: #ffffff; color: ##24282d; border: 1px solid #ffffff; border-radius: 5px; padding: 10px;" %}
+            </div>
+            <div class="col-sm-3">
+              <label for="autoSizingSelect">Choose Job Type</label>
+              {% render_field filter.form.job_type class="form-select" id="autosizingInput" style="background-color: #ffffff; color: ##24282d; border: 1px solid #ffffff; border-radius: 5px; padding: 10px;" %}
+            </div>
+            <div class="col-sm-3">
+              <label for="autoSizingSelect">Select Industry</label>
+              {% render_field filter.form.industry class="form-select" id="autosizingInput" style="background-color: #ffffff; color: ##24282d; border: 1px solid #ffffff; border-radius: 5px; padding: 10px;" %}
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary" style="background-color: #049DD9; color: #ffffff; border: 1px solid #049DD9;">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <p class="col-md-8 fs-6 mt-3">
+        Welcome to job hunter! Search and get your dream job. We have thousands of job offerings for you. Don't forget to leave a like when you get a job. Good luck with your job hunt!
+      </p>
+    </div>
+  </div>
+</section>
+
+<a href="{% url 'job-listing' %}" class="btn btn-outline-primary" type="button">More Jobs</a>
+
+<div  class="row row-cols-1 row-cols-md-3 g-4">
+  {% for job in filter.qs %}
+  <div  class="col">
+    <div class="card h-100" style="background-color: rgba(210, 217, 217, 0.8); color: black; border: 1px solid rgba(210, 217, 217, 0.8);">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <p class="card-text">Industry: {{ job.industry }}</p>
+        <p class="card-text">Job Type: {{ job.job_type }}</p>
+        <p class="card-text">Location: {{ job.city }}, {{ job.state }}</p>
+        <p class="card-text">Salary: {{ job.salary }}</p>
+      </div>
+      <div class="card-footer" style="color: #ffffff;">
+        <small class="text-muted">{{ job.timestamp | naturaltime }}</small>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<br>
+{% endblock content %}
